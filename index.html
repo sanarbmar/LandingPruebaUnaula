@@ -17,7 +17,7 @@
   <!-- Tipografía Google Fonts: Archivo Variable -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -41,6 +41,7 @@
 
     html {
       scroll-behavior: smooth;
+      font-size: clamp(13px, 1.05vw, 19px);
     }
 
     body {
@@ -60,10 +61,22 @@
       }
     }
 
-    h1, h2, h3, .titular {
+    h1, h2, h3, .titular, .titular-l1, .titular-l2, .hero-titular, .titulo-datos {
       font-stretch: 78%;
       letter-spacing: -0.01em;
       line-height: 0.95;
+      text-wrap: balance;
+    }
+
+    @media (max-width: 767px) {
+      .titular-bloque br,
+      .hero-titular br,
+      .escalones-bienvenida br,
+      h1 br,
+      h2 br,
+      h3 br {
+        display: none;
+      }
     }
 
     a:focus-visible,
@@ -89,48 +102,68 @@
 
     .contenedor-ancho {
       width: 100%;
-      max-width: 1120px;
+      max-width: 68rem;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 1.25rem;
       position: relative;
     }
 
     .contenedor-estrecho {
       width: 100%;
-      max-width: 740px;
+      max-width: 48rem;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 1.25rem;
       position: relative;
     }
 
-    /* Trazo de pincel con máscara y respaldo */
-    .trazo {
-      display: block;
-      height: 14px;
-      width: 220px;
-      max-width: 60%;
-      margin-top: 6px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: right center;
+    /* Trazos de pincel anclados a la última palabra del titular */
+    .trazo-fin,
+    .trazo-fin-rojo,
+    .trazo-fin-dorado,
+    .trazo-fin-crema {
+      position: relative;
+      white-space: nowrap;
     }
-    .trazo-rojo {
-      background-image: url("assets/trazo-rojo.png");
-      -webkit-mask: url("assets/trazo-pincel.png") center right/contain no-repeat;
-      mask: url("assets/trazo-pincel.png") center right/contain no-repeat;
+    .trazo-fin::after,
+    .trazo-fin-rojo::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: calc(100% + 0.10em);
+      width: 4.4em;
+      height: 0.57em;
+      -webkit-mask: url("assets/trazo-pincel.png") right center / 100% 100% no-repeat;
+              mask: url("assets/trazo-pincel.png") right center / 100% 100% no-repeat;
       background-color: var(--rojo-vivo);
+      pointer-events: none;
     }
-    .trazo-dorado {
-      background-image: url("assets/trazo-dorado.png");
-      -webkit-mask: url("assets/trazo-pincel.png") center right/contain no-repeat;
-      mask: url("assets/trazo-pincel.png") center right/contain no-repeat;
+    .trazo-fin-dorado::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: calc(100% + 0.10em);
+      width: 4.4em;
+      height: 0.57em;
+      -webkit-mask: url("assets/trazo-pincel.png") right center / 100% 100% no-repeat;
+              mask: url("assets/trazo-pincel.png") right center / 100% 100% no-repeat;
       background-color: var(--dorado);
+      pointer-events: none;
     }
-    .trazo-crema {
-      background-image: url("assets/trazo-crema.png");
-      -webkit-mask: url("assets/trazo-pincel.png") center right/contain no-repeat;
-      mask: url("assets/trazo-pincel.png") center right/contain no-repeat;
+    .trazo-fin-crema::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: calc(100% + 0.10em);
+      width: 4.4em;
+      height: 0.57em;
+      -webkit-mask: url("assets/trazo-pincel.png") right center / 100% 100% no-repeat;
+              mask: url("assets/trazo-pincel.png") right center / 100% 100% no-repeat;
       background-color: var(--crema);
+      pointer-events: none;
+    }
+
+    .con-trazo {
+      padding-bottom: 0.9em;
     }
 
     /* Patrón de titular en dos líneas */
@@ -145,22 +178,16 @@
     .titular-l1 {
       font-weight: 700;
       font-stretch: 80%;
-      font-size: clamp(1.15rem, 2.5vw, 1.6rem);
+      font-size: 1.375rem;
       line-height: 1.15;
     }
     .titular-l2 {
       font-weight: 900;
       font-stretch: 78%;
-      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-size: 2.5rem;
       line-height: 0.95;
       text-transform: uppercase;
-      margin-top: 4px;
-    }
-    .titular-bloque .trazo {
-      align-self: flex-end;
-      margin-left: auto;
-      margin-right: 0;
-      margin-top: 6px;
+      margin-top: 0.25rem;
     }
 
     /* Fondo marca de agua del edificio */
@@ -175,18 +202,6 @@
       opacity: 0.08;
       pointer-events: none;
       z-index: 0;
-    }
-
-    /* Ondas divisorias */
-    .onda-divisoria {
-      display: block;
-      width: 100%;
-      height: auto;
-      max-height: 54px;
-      object-fit: cover;
-      vertical-align: bottom;
-      position: relative;
-      z-index: 2;
     }
 
     /* Botones */
@@ -256,17 +271,19 @@
       background: #FFFFFF;
       box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
       z-index: 990;
+      height: 3.9rem;
     }
     .barra-superior-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
-      max-width: 1120px;
+      padding: 0 1.25rem;
+      max-width: 68rem;
       margin: 0 auto;
+      height: 3.9rem;
     }
     .logo-barra {
-      height: 40px;
+      height: 2.5rem;
       width: auto;
       object-fit: contain;
     }
@@ -353,56 +370,58 @@
     }
 
     /* 1. HERO */
-    .seccion-hero {
-      background-color: var(--crema-calido);
-      padding: 56px 20px 84px;
-      text-align: center;
+    .hero {
       position: relative;
+      background: var(--crema-calido, #ECE8E1);
       overflow: hidden;
+      padding-top: 8.4rem;      /* 90px sobre el lienzo de referencia de 1024 */
+      padding-bottom: 19rem;    /* espacio para la onda */
     }
-    .hero-logo-60 {
-      width: 300px;
-      max-width: 85%;
+
+    .hero__fondo {
+      position: absolute; inset: 0;
+      background: url("assets/edificio-linea.jpg") center / cover no-repeat;
+      opacity: .10;
+      z-index: 0;
+    }
+
+    /* ornamento de esquina: PEQUEÑO, 11% del ancho, proporción intacta */
+    .hero__curva {
+      position: absolute; top: 0; left: 0;
+      width: 11%;
+      min-width: 48px;
+      max-width: 170px;
+      height: auto;             /* nunca fijar alto: deforma el arco */
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero__contenido { position: relative; z-index: 2; text-align: center; }
+
+    .hero__logo {
+      width: 27.8%;
+      max-width: 26.5rem;
       height: auto;
-      margin: 0 auto 28px;
       display: block;
-      position: relative;
-      z-index: 1;
-    }
-    .hero-titular {
-      font-family: inherit;
-      color: var(--texto);
-      position: relative;
-      z-index: 1;
-      max-width: 780px;
       margin: 0 auto;
     }
-    .hero-titular-l1 {
-      font-size: clamp(1.4rem, 3.4vw, 2.3rem);
-      font-weight: 700;
-      font-stretch: 80%;
-      line-height: 1.15;
-      display: block;
+
+    .hero__titulo {
+      font-size: min(5.8rem, 17vw);   /* 62px en la referencia; min() evita desborde en móvil */
+      font-weight: 600;
+      font-stretch: 72%;
+      letter-spacing: -.005em;
+      line-height: 1;
+      color: var(--texto, #1A1A1A);
+      margin-top: 4.8rem;             /* 52px bajo el logo */
+      white-space: nowrap;
     }
-    .hero-titular-l2 {
-      font-size: clamp(2rem, 6vw, 4.2rem);
-      font-weight: 900;
-      font-stretch: 78%;
-      line-height: 0.95;
-      display: block;
-      text-transform: uppercase;
-      margin-top: 4px;
-    }
-    .hero-curva-dorada {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 140px;
-      max-width: 30%;
-      height: auto;
-      pointer-events: none;
-      z-index: 2;
-    }
+
+    /* transición al bloque rojo */
+    .onda { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; line-height: 0; }
+    .onda img { display: block; width: 100%; height: auto; }
+    .onda__oro  { position: absolute; left: 0; right: 0; bottom: 0; z-index: 0; }
+    .onda__roja { position: relative; z-index: 1; }
 
     /* 2. BLOQUE ROJO DE BIENVENIDA */
     .seccion-bienvenida {
@@ -420,36 +439,31 @@
       margin-bottom: 24px;
     }
     .esc-l1 {
-      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-size: 1.5rem;
       font-weight: 700;
       font-stretch: 82%;
       color: var(--texto-claro);
     }
     .esc-l2 {
-      font-size: clamp(1.8rem, 4.8vw, 3rem);
+      font-size: 2.5rem;
       font-weight: 900;
       font-stretch: 78%;
       color: var(--texto-claro);
       line-height: 0.95;
     }
     .esc-l3 {
-      font-size: clamp(2.3rem, 6.4vw, 4.4rem);
+      font-size: 3.5rem;
       font-weight: 900;
       font-stretch: 78%;
       color: var(--texto-claro);
       line-height: 0.92;
       text-transform: uppercase;
     }
-    .escalones-bienvenida .trazo {
-      align-self: flex-end;
-      margin-left: auto;
-      margin-right: 0;
-    }
     .parrafo-bienvenida {
-      font-size: clamp(15px, 2vw, 18px);
+      font-size: 1.0625rem;
       line-height: 1.65;
-      max-width: 640px;
-      margin: 0 auto 32px;
+      max-width: 40rem;
+      margin: 0 auto 2rem;
       color: var(--texto-claro);
       font-stretch: 88%;
     }
@@ -470,7 +484,7 @@
       text-align: center;
     }
     .titulo-datos {
-      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+      font-size: 2.25rem;
       font-weight: 900;
       font-stretch: 78%;
       text-transform: uppercase;
@@ -565,7 +579,7 @@
       text-align: center;
     }
     .subtitulo-dorado {
-      font-size: clamp(1.2rem, 2.8vw, 1.6rem);
+      font-size: 1.375rem;
       font-weight: 700;
       font-stretch: 82%;
       color: var(--dorado);
@@ -997,14 +1011,14 @@
     dialog.modal-historia {
       background-color: var(--crema);
       border: none;
-      border-top: 6px solid var(--dorado);
-      border-radius: 20px;
-      max-width: 640px;
-      width: calc(100% - 32px);
+      border-top: 0.375rem solid var(--dorado);
+      border-radius: 1.25rem;
+      max-width: 40rem;
+      width: calc(100% - 2rem);
       max-height: 85vh;
       padding: 0;
       margin: auto;
-      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 1.25rem 3rem rgba(0, 0, 0, 0.4);
       position: fixed;
       inset: 0;
       overflow: hidden;
@@ -1022,7 +1036,7 @@
     @keyframes modalEntrada {
       from {
         opacity: 0;
-        transform: translateY(8px);
+        transform: translateY(0.5rem);
       }
       to {
         opacity: 1;
@@ -1048,6 +1062,9 @@
       width: 100%;
       aspect-ratio: 16 / 9;
       background-color: #000000;
+      border-top-left-radius: 1.25rem;
+      border-top-right-radius: 1.25rem;
+      overflow: hidden;
     }
     .modal-img {
       width: 100%;
@@ -1055,15 +1072,15 @@
       aspect-ratio: 16 / 9;
       object-fit: cover;
       display: block;
-      border-top-left-radius: 14px;
-      border-top-right-radius: 14px;
+      border-top-left-radius: 1.25rem;
+      border-top-right-radius: 1.25rem;
     }
     .modal-btn-cerrar {
       position: absolute;
-      top: 14px;
-      right: 14px;
-      width: 40px;
-      height: 40px;
+      top: 0.875rem;
+      right: 0.875rem;
+      width: 2.5rem;
+      height: 2.5rem;
       border-radius: 50%;
       background-color: rgba(172, 36, 34, 0.08);
       backdrop-filter: blur(4px);
@@ -1087,7 +1104,7 @@
       outline-offset: 2px;
     }
     .modal-cuerpo {
-      padding: 24px 28px 28px;
+      padding: 1.5rem 1.75rem 1.75rem;
       overflow-y: auto;
       flex-grow: 1;
       text-align: left;
@@ -1102,30 +1119,26 @@
       border-radius: 3px;
     }
     .modal-titulo {
-      font-size: clamp(1.35rem, 3.2vw, 1.85rem);
+      font-size: 1.75rem;
       font-weight: 900;
       font-stretch: 78%;
       color: var(--rojo-vivo);
       line-height: 1.15;
       margin: 0;
       text-transform: uppercase;
-    }
-    .modal-trazo {
-      margin: 6px 0 14px 0;
-      width: 180px;
-      max-width: 55%;
+      padding-bottom: 0.9em;
     }
     .modal-meta {
       color: var(--dorado);
       font-weight: 700;
       text-transform: uppercase;
-      font-size: 13px;
+      font-size: 0.8125rem;
       letter-spacing: 0.05em;
       margin-bottom: 14px;
     }
     .modal-texto {
       color: var(--texto);
-      font-size: 15px;
+      font-size: 0.9375rem;
       line-height: 1.6;
       white-space: pre-line;
     }
@@ -1269,35 +1282,7 @@
       line-height: 1.55;
     }
 
-    /* 12. PQRS */
-    .seccion-pqrs {
-      background-color: var(--rojo);
-      color: var(--texto-claro);
-      padding: 64px 20px;
-      text-align: center;
-    }
-    .formulario-pqrs {
-      max-width: 640px;
-      margin: 28px auto 0;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      border-radius: 16px;
-      padding: 28px 24px;
-      text-align: left;
-    }
-    .formulario-pqrs .label-campo {
-      color: var(--texto-claro);
-    }
-    .canales-contacto {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-top: 28px;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--dorado);
-    }
+
 
     /* 13. CIERRE */
     .seccion-cierre {
@@ -1430,7 +1415,6 @@
         <a href="#que-vamos-a-celebrar" class="nav-enlace">Qué celebraremos</a>
         <a href="#sec-agenda" class="nav-enlace">Agenda</a>
         <a href="#faq" class="nav-enlace">Preguntas</a>
-        <a href="#pqrs" class="nav-enlace">PQRS</a>
         <a href="#inscripcion" class="btn btn-primario" onclick="irAInscripcion(event)">INSCRIBIRME</a>
       </nav>
     </div>
@@ -1445,25 +1429,25 @@
       <a href="#inscripcion" class="barra-btn barra-btn-secundario" onclick="irAInscripcion(event)">
         ACTUALIZA TUS DATOS
       </a>
-      <a href="#pqrs" class="barra-btn barra-btn-secundario">
-        ¿TIENES UNA PQRS?
-      </a>
     </div>
   </aside>
 
   <!-- ========================================================================
        SECCIÓN 1 — HERO
        ======================================================================== -->
-  <section class="seccion-hero con-marca-agua" id="seccion-hero" aria-label="Hero conmemorativo 60 años">
-    <div class="contenedor-ancho">
-      <img src="assets/logo-unaula-60.png" alt="UNAULA · 60 Años Haciendo Historia" class="hero-logo-60">
+  <section class="hero" id="seccion-hero" aria-label="Hero conmemorativo 60 años">
+    <div class="hero__fondo" aria-hidden="true"></div>
+    <img class="hero__curva" src="assets/curva-dorada.png" alt="" aria-hidden="true">
 
-      <h1 class="hero-titular">
-        <span class="hero-titular-l1">“60 años haciendo historia,</span>
-        <span class="hero-titular-l2">CONSTRUYENDO FUTURO”.</span>
-      </h1>
+    <div class="hero__contenido">
+      <img class="hero__logo" src="assets/logo-unaula-60.png"
+           alt="UNAULA · 60 años 1966-2026">
+      <h1 class="hero__titulo">&ldquo;60&nbsp;años&rdquo;.</h1>
+    </div>
 
-      <img src="assets/curva-dorada.png" alt="" aria-hidden="true" class="hero-curva-dorada">
+    <div class="onda" aria-hidden="true">
+      <img class="onda__oro"  src="assets/onda-dorada.png" alt="">
+      <img class="onda__roja" src="assets/onda-roja.png"  alt="">
     </div>
   </section>
 
@@ -1472,12 +1456,11 @@
        ======================================================================== -->
   <section class="seccion-bienvenida" id="bienvenida" aria-label="Bienvenida al encuentro">
     <div class="contenedor-ancho">
-      <div class="escalones-bienvenida">
+      <div class="escalones-bienvenida con-trazo">
         <span class="esc-l1">AQUÍ SE</span>
         <span class="esc-l2">FORMAN</span>
         <span class="esc-l1">LOS QUE HACEN</span>
-        <span class="esc-l3">HISTORIA</span>
-        <span class="trazo trazo-dorado" aria-hidden="true"></span>
+        <span class="esc-l3"><span class="trazo-fin trazo-fin-dorado">HISTORIA</span></span>
       </div>
 
       <p class="parrafo-bienvenida">
@@ -1563,7 +1546,6 @@
     </div>
   </section>
 
-  <img src="assets/onda-dorada.png" alt="" aria-hidden="true" class="onda-divisoria">
 
   <!-- ========================================================================
        SECCIÓN 4 — ¿POR QUÉ NOS ENCONTRAMOS?
@@ -1575,10 +1557,7 @@
         <span class="titular-l2" style="color: var(--rojo-vivo);">ENCONTRAMOS?</span>
       </div>
 
-      <div class="subtitulo-dorado">Volver también es recordar quiénes somos</div>
-      <div style="display: flex; justify-content: center; margin-bottom: 24px;">
-        <span class="trazo trazo-rojo" aria-hidden="true"></span>
-      </div>
+      <div class="subtitulo-dorado con-trazo">Volver también es recordar quiénes <span class="trazo-fin trazo-fin-rojo">somos</span></div>
 
       <div class="versos-bloque">
         <span>Hay lugares a los que uno vuelve y reconoce inmediatamente.</span>
@@ -1604,7 +1583,6 @@
     </div>
   </section>
 
-  <img src="assets/onda-roja.png" alt="" aria-hidden="true" class="onda-divisoria">
 
   <!-- ========================================================================
        SECCIÓN 5 — ¿QUÉ VAMOS A CELEBRAR?
@@ -1616,10 +1594,7 @@
         <span class="titular-l2" style="color: var(--texto-claro);">Un mismo orgullo.</span>
       </div>
 
-      <div class="subtitulo-dorado">En este encuentro celebraremos:</div>
-      <div style="display: flex; justify-content: center; margin-bottom: 24px;">
-        <span class="trazo trazo-crema" aria-hidden="true"></span>
-      </div>
+      <div class="subtitulo-dorado con-trazo">En este encuentro <span class="trazo-fin trazo-fin-crema">celebraremos:</span></div>
 
       <div class="grid-celebrar-4">
         <!-- 1: Nuestra historia -->
@@ -1661,17 +1636,15 @@
     </div>
   </section>
 
-  <img src="assets/onda-dorada.png" alt="" aria-hidden="true" class="onda-divisoria">
 
   <!-- ========================================================================
        SECCIÓN 6 — EL ENCUENTRO
        ======================================================================== -->
   <section class="seccion-encuentro con-marca-agua" id="el-encuentro" aria-label="El Encuentro">
     <div class="contenedor-estrecho">
-      <div class="titular-bloque">
+      <div class="titular-bloque con-trazo">
         <span class="titular-l1" style="color: var(--rojo-vivo);">Una noche para volver a</span>
-        <span class="titular-l2" style="color: var(--rojo-vivo);">SENTIRNOS PARTE</span>
-        <span class="trazo trazo-dorado" aria-hidden="true"></span>
+        <span class="titular-l2" style="color: var(--rojo-vivo);">SENTIRNOS <span class="trazo-fin trazo-fin-rojo">PARTE</span></span>
       </div>
 
       <p class="parrafo-encuentro">
@@ -1680,7 +1653,6 @@
     </div>
   </section>
 
-  <img src="assets/onda-roja.png" alt="" aria-hidden="true" class="onda-divisoria">
 
   <!-- ========================================================================
        SECCIÓN 7 — TARJETA DE INSCRIPCIÓN (~40% DE LA PÁGINA)
@@ -1690,10 +1662,9 @@
       
       <!-- PANTALLA NORMAL DE INSCRIPCIÓN -->
       <div id="bloque-formulario-inscripcion">
-        <div class="titular-bloque">
+        <div class="titular-bloque con-trazo">
           <span class="titular-l1" style="color: var(--texto-claro);">Reserva tu</span>
-          <span class="titular-l2" style="color: var(--texto-claro);">LUGAR</span>
-          <span class="trazo trazo-dorado" aria-hidden="true"></span>
+          <span class="titular-l2" style="color: var(--texto-claro);"><span class="trazo-fin trazo-fin-dorado">LUGAR</span></span>
         </div>
 
         <p style="text-align: center; color: var(--texto-claro); font-size: 16px; margin-bottom: 24px; max-width: 600px; margin-left: auto; margin-right: auto;">
@@ -1805,7 +1776,7 @@
                 No encontramos ese documento en nuestros registros; es posible que tu información esté desactualizada.
               </p>
             </div>
-            <a id="btn-contacto-no-encontrado" href="#pqrs" class="btn btn-primario" style="width: 100%; margin-bottom: 12px;">
+            <a id="btn-contacto-no-encontrado" href="#pie-pagina" class="btn btn-primario" style="width: 100%; margin-bottom: 12px;">
               Escríbenos
             </a>
             <button type="button" class="btn btn-secundario" style="width: 100%;" onclick="reiniciarConsulta();">
@@ -1856,9 +1827,8 @@
             </svg>
           </div>
 
-          <div class="titular-bloque">
-            <span class="titular-l2" style="color: var(--rojo-vivo); font-size: clamp(1.8rem, 4.5vw, 2.6rem);">¡Ya eres parte del reencuentro!</span>
-            <span class="trazo trazo-dorado" aria-hidden="true"></span>
+          <div class="titular-bloque con-trazo">
+            <span class="titular-l2" style="color: var(--rojo-vivo); font-size: 2.25rem;">¡Ya eres parte del <span class="trazo-fin trazo-fin-rojo">reencuentro!</span></span>
           </div>
 
           <p style="font-size: 16px; line-height: 1.65; color: var(--texto); max-width: 580px; margin: 0 auto 20px;">
@@ -1888,17 +1858,15 @@
     </div>
   </section>
 
-  <img src="assets/onda-dorada.png" alt="" aria-hidden="true" class="onda-divisoria">
 
   <!-- ========================================================================
        SECCIÓN 8 — ¿QUIÉNES ESTÁN INVITADOS?
        ======================================================================== -->
   <section class="seccion-invitados" id="quienes-estan-invitados" aria-label="Invitados al encuentro">
     <div class="contenedor-ancho">
-      <div class="titular-bloque">
+      <div class="titular-bloque con-trazo">
         <span class="titular-l1" style="color: var(--texto-claro);">Si alguna vez hiciste parte de UNAULA,</span>
-        <span class="titular-l2" style="color: var(--texto-claro);">esta celebración también es tuya.</span>
-        <span class="trazo trazo-dorado" aria-hidden="true"></span>
+        <span class="titular-l2" style="color: var(--texto-claro);">esta celebración también es <span class="trazo-fin trazo-fin-dorado">tuya.</span></span>
       </div>
 
       <div class="grid-invitados-2col">
@@ -1924,17 +1892,15 @@
     </div>
   </section>
 
-  <img src="assets/onda-dorada.png" alt="" aria-hidden="true" class="onda-divisoria">
 
   <!-- ========================================================================
        SECCIÓN 9 — HISTORIAS DE ÉXITO (Condicional)
        ======================================================================== -->
   <section class="seccion-historias con-marca-agua" id="sec-historias" aria-label="Historias de éxito">
     <div class="contenedor-ancho">
-      <div class="titular-bloque">
+      <div class="titular-bloque con-trazo">
         <span class="titular-l1" style="color: var(--rojo-vivo);">Detrás de cada historia de éxito</span>
-        <span class="titular-l2" style="color: var(--rojo-vivo);">hay una historia de UNAULA</span>
-        <span class="trazo trazo-dorado" aria-hidden="true"></span>
+        <span class="titular-l2" style="color: var(--rojo-vivo);">hay una historia de <span class="trazo-fin trazo-fin-rojo">UNAULA</span></span>
       </div>
 
       <p class="parrafo-comun">
@@ -2048,17 +2014,15 @@
     </div>
   </section>
 
-  <img src="assets/onda-dorada.png" alt="" aria-hidden="true" class="onda-divisoria">
 
   <!-- ========================================================================
        SECCIÓN 11 — PREGUNTAS FRECUENTES
        ======================================================================== -->
   <section class="seccion-faq con-marca-agua" id="faq" aria-label="Preguntas frecuentes">
     <div class="contenedor-estrecho">
-      <div class="titular-bloque">
+      <div class="titular-bloque con-trazo">
         <span class="titular-l1" style="color: var(--rojo-vivo);">Resolvemos tus dudas</span>
-        <span class="titular-l2" style="color: var(--rojo-vivo);">PREGUNTAS FRECUENTES</span>
-        <span class="trazo trazo-dorado" aria-hidden="true"></span>
+        <span class="titular-l2" style="color: var(--rojo-vivo);">PREGUNTAS <span class="trazo-fin trazo-fin-rojo">FRECUENTES</span></span>
       </div>
 
       <div class="faq-lista">
@@ -2092,82 +2056,22 @@
         </details>
         <details class="faq-item">
           <summary>¿Dónde puedo hacer una pregunta o presentar una PQRS? <span class="faq-flecha">▼</span></summary>
-          <div class="faq-contenido">Puedes comunicarte con el Centro de Egresados de UNAULA a través de los canales habilitados en esta página.</div>
+          <div class="faq-contenido">Puedes comunicarte con el Centro de Egresados de UNAULA a través de los datos de contacto (correo, teléfono y WhatsApp) indicados en el pie de página.</div>
         </details>
       </div>
     </div>
   </section>
 
-  <img src="assets/onda-roja.png" alt="" aria-hidden="true" class="onda-divisoria">
 
-  <!-- ========================================================================
-       SECCIÓN 12 — PQRS Y ATENCIÓN AL EGRESADO (Condicional)
-       ======================================================================== -->
-  <section class="seccion-pqrs" id="pqrs" aria-label="Atención y PQRS">
-    <div class="contenedor-estrecho">
-      <div class="titular-bloque">
-        <span class="titular-l1" style="color: var(--texto-claro);">¿Tienes una pregunta, solicitud o comentario?</span>
-        <span class="titular-l2" style="color: var(--texto-claro);">ATENCIÓN AL EGRESADO Y PQRS</span>
-        <span class="trazo trazo-dorado" aria-hidden="true"></span>
-      </div>
-
-      <p class="parrafo-comun" style="color: var(--texto-claro);">
-        Queremos escucharte. Si tienes una petición, queja, reclamo, sugerencia o felicitación relacionada con el Encuentro de Egresados, puedes comunicarte con nosotros.
-      </p>
-
-      <form class="formulario-pqrs" id="form-pqrs" onsubmit="event.preventDefault(); enviarPQRS();">
-        <div class="campo-wrap">
-          <label for="pqrs-nombre" class="label-campo">Nombre completo</label>
-          <input type="text" id="pqrs-nombre" class="input-control" required>
-        </div>
-        <div class="campo-wrap">
-          <label for="pqrs-correo" class="label-campo">Correo electrónico</label>
-          <input type="email" id="pqrs-correo" class="input-control" required>
-        </div>
-        <div class="campo-wrap">
-          <label for="pqrs-tel" class="label-campo">Teléfono</label>
-          <input type="tel" id="pqrs-tel" class="input-control" required>
-        </div>
-        <div class="campo-wrap">
-          <label for="pqrs-tipo" class="label-campo">Tipo de solicitud</label>
-          <select id="pqrs-tipo" class="input-control" style="background: #FFFFFF;" required>
-            <option value="Petición">Petición</option>
-            <option value="Queja">Queja</option>
-            <option value="Reclamo">Reclamo</option>
-            <option value="Sugerencia">Sugerencia</option>
-            <option value="Felicitación">Felicitación</option>
-          </select>
-        </div>
-        <div class="campo-wrap">
-          <label for="pqrs-asunto" class="label-campo">Asunto</label>
-          <input type="text" id="pqrs-asunto" class="input-control" required>
-        </div>
-        <div class="campo-wrap">
-          <label for="pqrs-mensaje" class="label-campo">Mensaje</label>
-          <textarea id="pqrs-mensaje" class="input-control" style="height: 100px; resize: vertical;" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-crema-rojo" style="width: 100%;">ENVIAR SOLICITUD</button>
-      </form>
-
-      <div class="canales-contacto">
-        <div>[CORREO OFICIAL PENDIENTE]</div>
-        <div>·</div>
-        <div>[WHATSAPP / TELÉFONO PENDIENTE]</div>
-        <div>·</div>
-        <div>Centro de Egresados — UNAULA</div>
-      </div>
-    </div>
-  </section>
 
   <!-- ========================================================================
        SECCIÓN 13 — CIERRE EMOCIONAL
        ======================================================================== -->
   <section class="seccion-cierre" aria-label="Cierre">
     <div class="contenedor-estrecho">
-      <div class="titular-bloque">
+      <div class="titular-bloque con-trazo">
         <span class="titular-l1" style="color: var(--texto-claro);">Reserva tu</span>
-        <span class="titular-l2" style="color: var(--texto-claro); font-size: clamp(2.4rem, 6.5vw, 4.2rem);">LUGAR</span>
-        <span class="trazo trazo-dorado" aria-hidden="true"></span>
+        <span class="titular-l2" style="color: var(--texto-claro); font-size: 3.25rem;"><span class="trazo-fin trazo-fin-dorado">LUGAR</span></span>
       </div>
 
       <div class="versos-cierre">
@@ -2192,7 +2096,7 @@
   <!-- ========================================================================
        SECCIÓN 14 — PIE DE PÁGINA
        ======================================================================== -->
-  <footer class="footer-unaula">
+  <footer class="footer-unaula" id="pie-pagina">
     <div class="contenedor-ancho">
       <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
         <img src="assets/logo-unaula.png" alt="UNAULA" style="height: 42px; width: auto; filter: brightness(0) invert(1);">
@@ -2211,7 +2115,6 @@
 
         <div>
           <div class="footer-col-titulo">Enlaces y Legales</div>
-          <a href="#pqrs" class="footer-enlace">PQRS</a>
           <span class="footer-texto-pendiente">Política de tratamiento de datos [PENDIENTE]</span>
           <span class="footer-texto-pendiente">Términos y condiciones [PENDIENTE]</span>
         </div>
@@ -2234,8 +2137,7 @@
         </button>
       </div>
       <div class="modal-cuerpo" tabindex="0">
-        <h3 class="modal-titulo" id="modal-historia-titulo">[TÍTULO DE LA HISTORIA]</h3>
-        <span class="trazo trazo-dorado modal-trazo" aria-hidden="true"></span>
+        <h3 class="modal-titulo con-trazo" id="modal-historia-titulo">[TÍTULO DE LA HISTORIA]</h3>
         <div class="modal-meta" id="modal-historia-meta">[PROGRAMA · AÑO]</div>
         <div class="modal-texto" id="modal-historia-texto">[TEXTO PENDIENTE]</div>
       </div>
@@ -2261,14 +2163,13 @@
         fechaISO: "2026-11-06T19:00:00-05:00",
         hora: "[PENDIENTE — hora de inicio] a [PENDIENTE — hora de finalización]",
         lugar: "Plaza Mayor Medellín",
-        pabellon: "Pabellón Verde",
+        pabellon: "Pabellón Verde — Plaza Mayor Medellín",
         ciudad: "Medellín, Antioquia"
       },
 
       secciones: {
         mostrarAgenda: true,
-        mostrarHistorias: true,
-        mostrarPqrs: true
+        mostrarHistorias: true
       },
 
       institucion: {
@@ -2636,22 +2537,6 @@
       document.body.removeChild(link);
     }
 
-    function enviarPQRS() {
-      const nombre = document.getElementById("pqrs-nombre").value;
-      const correo = document.getElementById("pqrs-correo").value;
-      const tel = document.getElementById("pqrs-tel").value;
-      const tipo = document.getElementById("pqrs-tipo").value;
-      const asunto = document.getElementById("pqrs-asunto").value;
-      const msg = document.getElementById("pqrs-mensaje").value;
-
-      const sub = encodeURIComponent(`[PQRS Encuentro 60 Años - ${tipo}] ${asunto}`);
-      const body = encodeURIComponent(
-        `Tipo de solicitud: ${tipo}\nNombre: ${nombre}\nCorreo: ${correo}\nTeléfono: ${tel}\n\nMensaje:\n${msg}`
-      );
-
-      window.location.href = `mailto:${CONFIG.institucion.correoContacto}?subject=${sub}&body=${body}`;
-    }
-
     function scrollHistorias(direccion) {
       const track = document.getElementById("carrusel-historias");
       if (track) {
@@ -2682,7 +2567,15 @@
         img.src = historia.imagen;
         img.alt = historia.titulo;
       }
-      if (tit) tit.textContent = historia.titulo;
+      if (tit) {
+        const palabras = (historia.titulo || "").trim().split(/\s+/);
+        if (palabras.length > 1) {
+          const ultima = palabras.pop();
+          tit.innerHTML = `${palabras.join(" ")} <span class="trazo-fin trazo-fin-dorado">${ultima}</span>`;
+        } else {
+          tit.innerHTML = `<span class="trazo-fin trazo-fin-dorado">${historia.titulo}</span>`;
+        }
+      }
       if (meta) meta.textContent = historia.programaAnio;
       if (txt) txt.textContent = historia.texto;
 
@@ -2767,11 +2660,6 @@
         const s = document.getElementById("sec-historias");
         if (s) s.style.display = "none";
       }
-      if (!CONFIG.secciones.mostrarPqrs) {
-        const s = document.getElementById("pqrs");
-        if (s) s.style.display = "none";
-      }
-
       const params = new URLSearchParams(window.location.search);
       if (params.get("confirmado") === "1") {
         document.getElementById("bloque-formulario-inscripcion").style.display = "none";
