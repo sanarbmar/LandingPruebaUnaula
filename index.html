@@ -542,35 +542,6 @@
       margin: 0 auto 28px;
       color: var(--texto-claro);
     }
-    .contador-datos {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      margin-top: 10px;
-    }
-    .contador-box-vidrio {
-      background: rgba(255, 255, 255, 0.14);
-      border: 2px solid rgba(255, 255, 255, 0.5);
-      border-radius: 14px;
-      min-width: 80px;
-      padding: 12px 10px;
-      text-align: center;
-      backdrop-filter: blur(2px);
-    }
-    .contador-num-vidrio {
-      font-size: 32px;
-      font-weight: 900;
-      color: var(--dorado);
-      line-height: 1;
-    }
-    .contador-lbl-vidrio {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: var(--texto-claro);
-      margin-top: 4px;
-      letter-spacing: 0.04em;
-    }
 
     /* 4. ¿POR QUÉ NOS ENCONTRAMOS? */
     .seccion-por-que {
@@ -840,6 +811,18 @@
     .alerta-error {
       background-color: rgba(172, 36, 34, 0.08);
       border-left: 4px solid var(--rojo-vivo);
+    }
+    .politica-datos-tarjeta {
+      font-size: 11.5px;
+      line-height: 1.45;
+      color: #666666;
+      text-align: center;
+      margin-top: 12px;
+      margin-bottom: 4px;
+    }
+    .politica-pendiente {
+      opacity: 0.65;
+      font-weight: 600;
     }
     .spinner {
       width: 18px;
@@ -1315,50 +1298,6 @@
       margin-bottom: 28px;
     }
 
-    /* 14. FOOTER */
-    .footer-unaula {
-      background-color: var(--rojo-oscuro);
-      color: var(--texto-claro);
-      padding: 48px 20px 24px;
-      border-top: 4px solid var(--dorado);
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
-      margin-top: 24px;
-    }
-    .footer-texto-pendiente {
-      color: var(--texto-claro);
-      font-size: 14px;
-      display: block;
-      margin-bottom: 8px;
-      opacity: 0.55;
-      cursor: default;
-      user-select: none;
-    }
-    .footer-col-titulo {
-      font-size: 16px;
-      font-weight: 800;
-      font-stretch: 80%;
-      color: var(--dorado);
-      margin-bottom: 12px;
-      text-transform: uppercase;
-    }
-    .footer-enlace {
-      color: var(--texto-claro);
-      text-decoration: none;
-      font-size: 14px;
-      display: block;
-      margin-bottom: 8px;
-      opacity: 0.85;
-      transition: opacity 0.2s, color 0.2s;
-    }
-    .footer-enlace:hover {
-      opacity: 1;
-      color: var(--dorado);
-    }
-
     /* Responsive */
     @media (max-width: 1024px) {
       .grid-celebrar-4 {
@@ -1372,8 +1311,7 @@
       .grid-vidrio-3,
       .grid-celebrar-4,
       .grid-agenda-6,
-      .grid-invitados-2col,
-      .footer-grid {
+      .grid-invitados-2col {
         grid-template-columns: 1fr;
       }
       .grid-invitados-2col {
@@ -1521,28 +1459,16 @@
             </svg>
           </div>
           <div class="vidrio-label">Horario</div>
-          <div class="vidrio-valor">[PENDIENTE — hora de inicio y finalización]</div>
+          <div class="vidrio-valor">
+            Hora de inicio<br>
+            Hora de finalización
+          </div>
         </div>
       </div>
 
       <p class="parrafo-datos">
         Una noche para volver a encontrarnos, recordar lo que hemos construido y celebrar todo lo que está por venir.
       </p>
-
-      <div class="contador-datos" id="contador-cajas" aria-label="Cuenta regresiva para el evento">
-        <div class="contador-box-vidrio">
-          <div class="contador-num-vidrio" id="cd-dias">--</div>
-          <div class="contador-lbl-vidrio">Días</div>
-        </div>
-        <div class="contador-box-vidrio">
-          <div class="contador-num-vidrio" id="cd-horas">--</div>
-          <div class="contador-lbl-vidrio">Horas</div>
-        </div>
-        <div class="contador-box-vidrio">
-          <div class="contador-num-vidrio" id="cd-minutos">--</div>
-          <div class="contador-lbl-vidrio">Minutos</div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -1710,6 +1636,9 @@
                 <span id="btn-txt-continuar">Continuar</span>
                 <span id="btn-spin" class="spinner" style="display: none;" aria-hidden="true"></span>
               </button>
+              <p class="politica-datos-tarjeta">
+                Al continuar, aceptas el tratamiento de tus datos personales conforme a la política de UNAULA. Política de tratamiento de datos <span class="politica-pendiente">[PENDIENTE]</span>
+              </p>
             </form>
           </div>
 
@@ -1742,9 +1671,12 @@
               ¿Algún dato está desactualizado? Podrás corregirlo en el siguiente paso.
             </p>
 
-            <button type="button" class="btn btn-primario" style="width: 100%; margin-bottom: 12px;" onclick="irARedireccionForms();">
+            <button type="button" class="btn btn-primario" style="width: 100%; margin-bottom: 8px;" onclick="irARedireccionForms();">
               CONFIRMAR MI INSCRIPCIÓN
             </button>
+            <p class="politica-datos-tarjeta" style="margin-top: 0; margin-bottom: 12px;">
+              Al continuar, aceptas el tratamiento de tus datos personales conforme a la política de UNAULA. Política de tratamiento de datos <span class="politica-pendiente">[PENDIENTE]</span>
+            </p>
             <button type="button" class="btn btn-secundario" style="width: 100%;" onclick="reiniciarConsulta();">
               Consultar otro documento
             </button>
@@ -1760,9 +1692,12 @@
               <div class="resumen-fila"><span class="resumen-lbl">Egresado:</span><span class="resumen-val" id="yi-nombre">--</span></div>
               <div class="resumen-fila"><span class="resumen-lbl">Documento:</span><span class="resumen-val" id="yi-cedula">--</span></div>
             </div>
-            <button type="button" class="btn btn-primario" style="width: 100%; margin-bottom: 12px;" onclick="irARedireccionForms();">
+            <button type="button" class="btn btn-primario" style="width: 100%; margin-bottom: 8px;" onclick="irARedireccionForms();">
               Actualizar mis datos
             </button>
+            <p class="politica-datos-tarjeta" style="margin-top: 0; margin-bottom: 12px;">
+              Al continuar, aceptas el tratamiento de tus datos personales conforme a la política de UNAULA. Política de tratamiento de datos <span class="politica-pendiente">[PENDIENTE]</span>
+            </p>
             <button type="button" class="btn btn-secundario" style="width: 100%;" onclick="reiniciarConsulta();">
               Consultar otro documento
             </button>
@@ -1776,7 +1711,7 @@
                 No encontramos ese documento en nuestros registros; es posible que tu información esté desactualizada.
               </p>
             </div>
-            <a id="btn-contacto-no-encontrado" href="#pie-pagina" class="btn btn-primario" style="width: 100%; margin-bottom: 12px;">
+            <a id="btn-contacto-no-encontrado" href="mailto:egresados@unaula.edu.co" class="btn btn-primario" style="width: 100%; margin-bottom: 12px;">
               Escríbenos
             </a>
             <button type="button" class="btn btn-secundario" style="width: 100%;" onclick="reiniciarConsulta();">
@@ -1797,7 +1732,7 @@
             <div class="spinner" style="border-color: rgba(172,36,34,0.2); border-top-color: var(--rojo-vivo); width: 42px; height: 42px; margin: 0 auto 16px;"></div>
             <h3 style="font-size: 18px; font-weight: 800; color: var(--rojo-vivo); margin-bottom: 8px;">Te estamos llevando al formulario de confirmación…</h3>
             <p style="font-size: 14px; color: var(--texto); margin-bottom: 16px;">Por favor espera un momento.</p>
-            <a id="enlace-respaldo-manual" href="#inscripcion" class="footer-enlace" style="color: var(--rojo-vivo); font-weight: 700; text-decoration: underline;">
+            <a id="enlace-respaldo-manual" href="#inscripcion" style="color: var(--rojo-vivo); font-weight: 700; text-decoration: underline; font-size: 14px; display: inline-block;">
               Si no te redirige automáticamente, haz clic aquí
             </a>
           </div>
@@ -1850,7 +1785,7 @@
           </button>
 
           <div>
-            <a href="?" class="footer-enlace" style="color: var(--texto); opacity: 0.8; display: inline-block;">Volver al inicio</a>
+            <a href="?" style="color: var(--texto); opacity: 0.8; display: inline-block; font-size: 14px; text-decoration: none;">Volver al inicio</a>
           </div>
         </div>
       </div>
@@ -1912,57 +1847,35 @@
 
         <div class="carrusel-track" id="carrusel-historias">
           <!-- Tarjeta 1 -->
-          <button type="button" class="card-historia-carrusel" onclick="abrirModalHistoria(0)" aria-haspopup="dialog" aria-label="Abrir historia: [TÍTULO DE LA HISTORIA]">
-            <img src="assets/foto-celebrar-1-historia.jpg" alt="Historia de éxito UNAULA" class="foto-historia-item" loading="lazy">
-            <div class="historia-titulo-item">[TÍTULO DE LA HISTORIA]</div>
-            <div class="historia-sub-item">[PROGRAMA · AÑO]</div>
-            <div class="historia-desc-item">[TEXTO PENDIENTE]</div>
-            <span class="historia-ver-mas">Ver más ›</span>
+          <button type="button" class="card-historia-carrusel" onclick="abrirModalHistoria(0)" aria-haspopup="dialog" aria-label="Abrir historia: Cuando servir se convierte en legado">
+            <img src="assets/foto-celebrar-1-historia.jpg" alt="Cuando servir se convierte en legado" class="foto-historia-item" loading="lazy">
+            <div class="historia-titulo-item">Cuando servir se convierte en legado</div>
+            <div class="historia-desc-item">UNAULA forma líderes comprometidos con el…</div>
+            <span class="historia-ver-mas">ver mas</span>
           </button>
 
           <!-- Tarjeta 2 -->
-          <button type="button" class="card-historia-carrusel" onclick="abrirModalHistoria(1)" aria-haspopup="dialog" aria-label="Abrir historia: [TÍTULO DE LA HISTORIA]">
-            <img src="assets/foto-celebrar-2-egresados.jpg" alt="Historia de éxito UNAULA" class="foto-historia-item" loading="lazy">
-            <div class="historia-titulo-item">[TÍTULO DE LA HISTORIA]</div>
-            <div class="historia-sub-item">[PROGRAMA · AÑO]</div>
-            <div class="historia-desc-item">[TEXTO PENDIENTE]</div>
-            <span class="historia-ver-mas">Ver más ›</span>
+          <button type="button" class="card-historia-carrusel" onclick="abrirModalHistoria(1)" aria-haspopup="dialog" aria-label="Abrir historia: Construir empresa, construir país">
+            <img src="assets/foto-celebrar-1-historia.jpg" alt="Construir empresa, construir país" class="foto-historia-item" loading="lazy">
+            <div class="historia-titulo-item">Construir empresa, construir país</div>
+            <div class="historia-desc-item">Los egresados UNAULA crean oportunidades y generan…</div>
+            <span class="historia-ver-mas">ver mas</span>
           </button>
 
           <!-- Tarjeta 3 -->
-          <button type="button" class="card-historia-carrusel" onclick="abrirModalHistoria(2)" aria-haspopup="dialog" aria-label="Abrir historia: [TÍTULO DE LA HISTORIA]">
-            <img src="assets/foto-celebrar-3-legado.jpg" alt="Historia de éxito UNAULA" class="foto-historia-item" loading="lazy">
-            <div class="historia-titulo-item">[TÍTULO DE LA HISTORIA]</div>
-            <div class="historia-sub-item">[PROGRAMA · AÑO]</div>
-            <div class="historia-desc-item">[TEXTO PENDIENTE]</div>
-            <span class="historia-ver-mas">Ver más ›</span>
+          <button type="button" class="card-historia-carrusel" onclick="abrirModalHistoria(2)" aria-haspopup="dialog" aria-label="Abrir historia: Cambiar vidas también es éxito">
+            <img src="assets/foto-celebrar-1-historia.jpg" alt="Cambiar vidas también es éxito" class="foto-historia-item" loading="lazy">
+            <div class="historia-titulo-item">Cambiar vidas también es éxito</div>
+            <div class="historia-desc-item">Transformar vidas es una forma de construir legado…</div>
+            <span class="historia-ver-mas">ver mas</span>
           </button>
 
           <!-- Tarjeta 4 -->
-          <button type="button" class="card-historia-carrusel" onclick="abrirModalHistoria(3)" aria-haspopup="dialog" aria-label="Abrir historia: [TÍTULO DE LA HISTORIA]">
-            <img src="assets/foto-celebrar-4-futuro.jpg" alt="Historia de éxito UNAULA" class="foto-historia-item" loading="lazy">
-            <div class="historia-titulo-item">[TÍTULO DE LA HISTORIA]</div>
-            <div class="historia-sub-item">[PROGRAMA · AÑO]</div>
-            <div class="historia-desc-item">[TEXTO PENDIENTE]</div>
-            <span class="historia-ver-mas">Ver más ›</span>
-          </button>
-
-          <!-- Tarjeta 5 -->
-          <button type="button" class="card-historia-carrusel" onclick="abrirModalHistoria(4)" aria-haspopup="dialog" aria-label="Abrir historia: [TÍTULO DE LA HISTORIA]">
-            <img src="assets/foto-egresados-grupo.jpg" alt="Historia de éxito UNAULA" class="foto-historia-item" loading="lazy">
-            <div class="historia-titulo-item">[TÍTULO DE LA HISTORIA]</div>
-            <div class="historia-sub-item">[PROGRAMA · AÑO]</div>
-            <div class="historia-desc-item">[TEXTO PENDIENTE]</div>
-            <span class="historia-ver-mas">Ver más ›</span>
-          </button>
-
-          <!-- Tarjeta 6 -->
-          <button type="button" class="card-historia-carrusel" onclick="abrirModalHistoria(5)" aria-haspopup="dialog" aria-label="Abrir historia: [TÍTULO DE LA HISTORIA]">
-            <img src="assets/foto-invitados.jpg" alt="Historia de éxito UNAULA" class="foto-historia-item" loading="lazy">
-            <div class="historia-titulo-item">[TÍTULO DE LA HISTORIA]</div>
-            <div class="historia-sub-item">[PROGRAMA · AÑO]</div>
-            <div class="historia-desc-item">[TEXTO PENDIENTE]</div>
-            <span class="historia-ver-mas">Ver más ›</span>
+          <button type="button" class="card-historia-carrusel" onclick="abrirModalHistoria(3)" aria-haspopup="dialog" aria-label="Abrir historia: El conocimiento que transforma el futuro">
+            <img src="assets/foto-celebrar-1-historia.jpg" alt="El conocimiento que transforma el futuro" class="foto-historia-item" loading="lazy">
+            <div class="historia-titulo-item">El conocimiento que transforma el futuro</div>
+            <div class="historia-desc-item">El conocimiento genera transformación y progreso…</div>
+            <span class="historia-ver-mas">ver mas</span>
           </button>
         </div>
 
@@ -1979,36 +1892,30 @@
       <h2 class="titulo-datos" style="margin-bottom: 12px;">Así viviremos este encuentro</h2>
       <p class="aviso-preliminar-agenda">Agenda preliminar. Sujeta a confirmación por parte de la producción del evento.</p>
 
-      <div class="grid-agenda-6">
+      <div class="grid-agenda-6" id="grid-agenda">
         <div class="card-agenda-vidrio">
-          <div class="agenda-hora">[HORA]</div>
+          <div class="agenda-hora">8:00 a. m.</div>
           <div class="agenda-momento">Llegada y registro</div>
-          <div class="agenda-desc">Recepción de nuestros egresados.</div>
         </div>
         <div class="card-agenda-vidrio">
-          <div class="agenda-hora">[HORA]</div>
+          <div class="agenda-hora">8:00 a. m.</div>
           <div class="agenda-momento">Bienvenida</div>
-          <div class="agenda-desc">Un mensaje para celebrar juntos los 60 años.</div>
         </div>
         <div class="card-agenda-vidrio">
-          <div class="agenda-hora">[HORA]</div>
+          <div class="agenda-hora">8:00 a. m.</div>
           <div class="agenda-momento">Historias que nos inspiran</div>
-          <div class="agenda-desc">Reconocimiento a las historias de éxito de nuestros egresados.</div>
         </div>
         <div class="card-agenda-vidrio">
-          <div class="agenda-hora">[HORA]</div>
-          <div class="agenda-momento">[ACTIVIDAD PENDIENTE]</div>
-          <div class="agenda-desc">[DESCRIPCIÓN PENDIENTE]</div>
+          <div class="agenda-hora">8:00 a. m.</div>
+          <div class="agenda-momento">Actividad / experiencia</div>
         </div>
         <div class="card-agenda-vidrio">
-          <div class="agenda-hora">[HORA]</div>
+          <div class="agenda-hora">8:00 a. m.</div>
           <div class="agenda-momento">Celebración</div>
-          <div class="agenda-desc">Música, encuentro y celebración.</div>
         </div>
         <div class="card-agenda-vidrio">
-          <div class="agenda-hora">[HORA]</div>
+          <div class="agenda-hora">8:00 a. m.</div>
           <div class="agenda-momento">Seguimos haciendo historia</div>
-          <div class="agenda-desc">Cierre e invitación a continuar conectados con UNAULA.</div>
         </div>
       </div>
     </div>
@@ -2054,10 +1961,6 @@
           <summary>¿Qué pasa si actualicé mis datos pero no puedo asistir? <span class="faq-flecha">▼</span></summary>
           <div class="faq-contenido">La actualización de datos permitirá que UNAULA pueda mantener el contacto contigo para futuras actividades de la comunidad de egresados.</div>
         </details>
-        <details class="faq-item">
-          <summary>¿Dónde puedo hacer una pregunta o presentar una PQRS? <span class="faq-flecha">▼</span></summary>
-          <div class="faq-contenido">Puedes comunicarte con el Centro de Egresados de UNAULA a través de los datos de contacto (correo, teléfono y WhatsApp) indicados en el pie de página.</div>
-        </details>
       </div>
     </div>
   </section>
@@ -2094,35 +1997,6 @@
   </section>
 
   <!-- ========================================================================
-       SECCIÓN 14 — PIE DE PÁGINA
-       ======================================================================== -->
-  <footer class="footer-unaula" id="pie-pagina">
-    <div class="contenedor-ancho">
-      <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
-        <img src="assets/logo-unaula.png" alt="UNAULA" style="height: 42px; width: auto; filter: brightness(0) invert(1);">
-        <div style="font-weight: 800; font-stretch: 80%; font-size: 16px; color: var(--dorado);">
-          UNAULA · 60 AÑOS — 60 años haciendo historia, construyendo futuro.
-        </div>
-      </div>
-
-      <div class="footer-grid">
-        <div>
-          <div class="footer-col-titulo">Centro de Egresados</div>
-          <div style="font-size: 14px; line-height: 1.6; color: var(--texto-claro);">
-            [CORREO PENDIENTE]<br>[TELÉFONO PENDIENTE]<br>[WHATSAPP PENDIENTE]
-          </div>
-        </div>
-
-        <div>
-          <div class="footer-col-titulo">Enlaces y Legales</div>
-          <span class="footer-texto-pendiente">Política de tratamiento de datos [PENDIENTE]</span>
-          <span class="footer-texto-pendiente">Términos y condiciones [PENDIENTE]</span>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ========================================================================
        MODAL NATIVO <dialog> — DETALLE DE HISTORIA DE ÉXITO
        ======================================================================== -->
   <dialog id="modal-historia" class="modal-historia" aria-labelledby="modal-historia-titulo">
@@ -2138,8 +2012,8 @@
       </div>
       <div class="modal-cuerpo" tabindex="0">
         <h3 class="modal-titulo con-trazo" id="modal-historia-titulo">[TÍTULO DE LA HISTORIA]</h3>
-        <div class="modal-meta" id="modal-historia-meta">[PROGRAMA · AÑO]</div>
-        <div class="modal-texto" id="modal-historia-texto">[TEXTO PENDIENTE]</div>
+        <div class="modal-meta" id="modal-historia-meta" style="display: none;"></div>
+        <div class="modal-texto" id="modal-historia-texto">[HISTORIA COMPLETA PENDIENTE]</div>
       </div>
     </div>
   </dialog>
@@ -2161,7 +2035,7 @@
         lema: "60 años haciendo historia. Construyendo futuro.",
         fechaTexto: "Viernes 6 de noviembre de 2026",
         fechaISO: "2026-11-06T19:00:00-05:00",
-        hora: "[PENDIENTE — hora de inicio] a [PENDIENTE — hora de finalización]",
+        hora: "",
         lugar: "Plaza Mayor Medellín",
         pabellon: "Pabellón Verde — Plaza Mayor Medellín",
         ciudad: "Medellín, Antioquia"
@@ -2230,47 +2104,43 @@
      */
     const HISTORIAS = [
       {
-        id: 1,
-        titulo: "[TÍTULO DE LA HISTORIA]",
-        programaAnio: "[PROGRAMA · AÑO]",
-        texto: "[TEXTO PENDIENTE]",
+        titulo: "Cuando servir se convierte en legado",
+        resumen: "UNAULA forma líderes comprometidos con el…",
+        cuerpo: "[HISTORIA COMPLETA PENDIENTE]",
         imagen: "assets/foto-celebrar-1-historia.jpg"
       },
       {
-        id: 2,
-        titulo: "[TÍTULO DE LA HISTORIA]",
-        programaAnio: "[PROGRAMA · AÑO]",
-        texto: "[TEXTO PENDIENTE]",
-        imagen: "assets/foto-celebrar-2-egresados.jpg"
+        titulo: "Construir empresa, construir país",
+        resumen: "Los egresados UNAULA crean oportunidades y generan…",
+        cuerpo: "[HISTORIA COMPLETA PENDIENTE]",
+        imagen: "assets/foto-celebrar-1-historia.jpg"
       },
       {
-        id: 3,
-        titulo: "[TÍTULO DE LA HISTORIA]",
-        programaAnio: "[PROGRAMA · AÑO]",
-        texto: "[TEXTO PENDIENTE]",
-        imagen: "assets/foto-celebrar-3-legado.jpg"
+        titulo: "Cambiar vidas también es éxito",
+        resumen: "Transformar vidas es una forma de construir legado…",
+        cuerpo: "[HISTORIA COMPLETA PENDIENTE]",
+        imagen: "assets/foto-celebrar-1-historia.jpg"
       },
       {
-        id: 4,
-        titulo: "[TÍTULO DE LA HISTORIA]",
-        programaAnio: "[PROGRAMA · AÑO]",
-        texto: "[TEXTO PENDIENTE]",
-        imagen: "assets/foto-celebrar-4-futuro.jpg"
-      },
-      {
-        id: 5,
-        titulo: "[TÍTULO DE LA HISTORIA]",
-        programaAnio: "[PROGRAMA · AÑO]",
-        texto: "[TEXTO PENDIENTE]",
-        imagen: "assets/foto-egresados-grupo.jpg"
-      },
-      {
-        id: 6,
-        titulo: "[TÍTULO DE LA HISTORIA]",
-        programaAnio: "[PROGRAMA · AÑO]",
-        texto: "[TEXTO PENDIENTE]",
-        imagen: "assets/foto-invitados.jpg"
+        titulo: "El conocimiento que transforma el futuro",
+        resumen: "El conocimiento genera transformación y progreso…",
+        cuerpo: "[HISTORIA COMPLETA PENDIENTE]",
+        imagen: "assets/foto-celebrar-1-historia.jpg"
       }
+    ];
+
+    /**
+     * ========================================================================
+     * DATOS DE AGENDA (Edición centralizada de momentos)
+     * ========================================================================
+     */
+    const AGENDA = [
+      { hora: "8:00 a. m.", momento: "Llegada y registro" },
+      { hora: "8:00 a. m.", momento: "Bienvenida" },
+      { hora: "8:00 a. m.", momento: "Historias que nos inspiran" },
+      { hora: "8:00 a. m.", momento: "Actividad / experiencia" },
+      { hora: "8:00 a. m.", momento: "Celebración" },
+      { hora: "8:00 a. m.", momento: "Seguimos haciendo historia" }
     ];
 
     const estado = {
@@ -2564,7 +2434,7 @@
       const txt = document.getElementById("modal-historia-texto");
 
       if (img) {
-        img.src = historia.imagen;
+        img.src = historia.imagen || "assets/foto-celebrar-1-historia.jpg";
         img.alt = historia.titulo;
       }
       if (tit) {
@@ -2576,8 +2446,8 @@
           tit.innerHTML = `<span class="trazo-fin trazo-fin-dorado">${historia.titulo}</span>`;
         }
       }
-      if (meta) meta.textContent = historia.programaAnio;
-      if (txt) txt.textContent = historia.texto;
+      if (meta) meta.style.display = "none";
+      if (txt) txt.textContent = historia.cuerpo || "[HISTORIA COMPLETA PENDIENTE]";
 
       if (modal && typeof modal.showModal === "function") {
         modal.showModal();
@@ -2595,14 +2465,25 @@
     function renderizarHistorias() {
       const track = document.getElementById("carrusel-historias");
       if (!track || !Array.isArray(HISTORIAS)) return;
+      const fotoGenerica = "assets/foto-celebrar-1-historia.jpg";
       track.innerHTML = HISTORIAS.map((h, i) => `
         <button type="button" class="card-historia-carrusel" onclick="abrirModalHistoria(${i})" aria-haspopup="dialog" aria-label="Abrir historia: ${h.titulo}">
-          <img src="${h.imagen}" alt="${h.titulo}" class="foto-historia-item" loading="lazy">
+          <img src="${h.imagen || fotoGenerica}" alt="${h.titulo}" class="foto-historia-item" loading="lazy">
           <div class="historia-titulo-item">${h.titulo}</div>
-          <div class="historia-sub-item">${h.programaAnio}</div>
-          <div class="historia-desc-item">${h.texto}</div>
-          <span class="historia-ver-mas">Ver más ›</span>
+          <div class="historia-desc-item">${h.resumen}</div>
+          <span class="historia-ver-mas">ver mas</span>
         </button>
+      `).join("");
+    }
+
+    function renderizarAgenda() {
+      const grid = document.getElementById("grid-agenda");
+      if (!grid || !Array.isArray(AGENDA)) return;
+      grid.innerHTML = AGENDA.map(a => `
+        <div class="card-agenda-vidrio">
+          <div class="agenda-hora">${a.hora}</div>
+          <div class="agenda-momento">${a.momento}</div>
+        </div>
       `).join("");
     }
 
@@ -2625,32 +2506,6 @@
       });
     }
 
-    function iniciarContador() {
-      const fechaObj = new Date(CONFIG.evento.fechaISO).getTime();
-      const elD = document.getElementById("cd-dias");
-      const elH = document.getElementById("cd-horas");
-      const elM = document.getElementById("cd-minutos");
-
-      function tick() {
-        const ahora = new Date().getTime();
-        const dist = fechaObj - ahora;
-        if (dist <= 0) {
-          if (elD) elD.textContent = "00";
-          if (elH) elH.textContent = "00";
-          if (elM) elM.textContent = "00";
-          return;
-        }
-        const d = Math.floor(dist / (1000 * 60 * 60 * 24));
-        const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
-        if (elD) elD.textContent = String(d).padStart(2, "0");
-        if (elH) elH.textContent = String(h).padStart(2, "0");
-        if (elM) elM.textContent = String(m).padStart(2, "0");
-      }
-      tick();
-      setInterval(tick, 1000);
-    }
-
     document.addEventListener("DOMContentLoaded", () => {
       if (!CONFIG.secciones.mostrarAgenda) {
         const s = document.getElementById("sec-agenda");
@@ -2668,10 +2523,10 @@
         document.getElementById("inscripcion").scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth" });
       }
 
-      iniciarContador();
       gestionarBarraFija();
       inicializarModalHistorias();
       renderizarHistorias();
+      renderizarAgenda();
     });
   </script>
 </body>
