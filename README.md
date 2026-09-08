@@ -44,10 +44,12 @@ Agrega `?confirmado=1` a la URL para ver la pantalla de confirmación.
 | Archivo | Para qué sirve |
 |---|---|
 | **`index.html`** | **Todo el sitio.** HTML, CSS y JavaScript en un solo archivo, sin dependencias |
+| `assets/` | Imágenes, logos y trazos gráficos que usa la página |
 | `.nojekyll` | Le indica a GitHub Pages que sirva los archivos tal cual, sin procesarlos |
-| `src/`, `package.json`, `vite.config.ts`, `tsconfig.json`, `.env.example` | Andamiaje de React/Vite que dejó Google AI Studio. **No se usa:** `index.html` no lo carga y `App.tsx` está vacío. Se puede borrar |
 
-No hay paso de compilación. `index.html` se abre con doble clic y funciona.
+No hay paso de compilación ni dependencias. `index.html` se abre con doble clic y funciona.
+
+> El andamiaje de React/Vite que dejó Google AI Studio (`src/`, `package.json`, `vite.config.ts`, `tsconfig.json`, `.env.example`, `metadata.json`) se eliminó: `index.html` nunca lo cargaba.
 
 ## Configuración
 
@@ -61,6 +63,16 @@ Todo lo que cambia entre eventos está en el objeto `CONFIG`, al inicio del `<sc
 - `modo` — `"demo"` lee los datos embebidos; `"produccion"` consulta el flujo de Power Automate
 
 > **No modifiques `forms.campos`.** Son los identificadores que Microsoft Forms genera para el prellenado por URL. Si se editan las preguntas del formulario, hay que volver a generar el vínculo con relleno previo y actualizar estos valores.
+
+## Tipografía
+
+Toda la página usa **Archivo**, una grotesca variable de Google Fonts, con el eje de ancho fijado en su extremo estrecho: `font-stretch: 62%`.
+
+La elección tiene una razón concreta. El diseño original de la pieza, hecho en Canva, usa **Anantason Wd50** — una condensada comercial de la fundición Jipatype (Bangkok) cuya licencia no cubre el uso como fuente web: la licencia de Canva habilita el uso dentro de Canva, no servir el archivo desde un sitio. Archivo al 62% es la aproximación más cercana con licencia SIL, sin costo ni restricción.
+
+Si UNAULA adquiere en algún momento la licencia webfont de Anantason, el cambio es acotado: agregar la regla `@font-face`, sustituir `"Archivo"` en la declaración de `body`, y eliminar las reglas `font-stretch` — Anantason Wd50 ya viene condensada de fábrica y no necesita el eje de ancho.
+
+Hoy la fuente se carga desde Google Fonts con el `<link>` del `<head>`. Para quitar esa dependencia externa —recomendable si el sitio va a vivir en una red cerrada o si no se quiere depender de un CDN— se descarga Archivo desde <https://fonts.google.com/specimen/Archivo>, se deja el archivo en `assets/fonts/` y se reemplaza el `<link>` por una regla `@font-face`.
 
 ## Pendientes
 
