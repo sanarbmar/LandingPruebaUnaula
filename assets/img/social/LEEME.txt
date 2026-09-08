@@ -1,0 +1,42 @@
+Iconos de redes sociales
+========================
+
+Faltan los siete archivos SVG. Se descargan de Simple Icons (simpleicons.org),
+que los publica bajo CC0. Desde la raíz del repositorio, en PowerShell:
+
+    $destino = "assets\img\social"
+    foreach ($red in "facebook","instagram","x","threads","youtube","spotify") {
+      Invoke-WebRequest "https://cdn.simpleicons.org/$red/1A1A1A" -OutFile "$destino\$red.svg"
+    }
+
+El sufijo /1A1A1A pide el icono en el gris oscuro del pie. Cambiando ese valor
+por otro hexadecimal se obtiene el icono en ese color.
+
+Los nombres de archivo deben quedar exactamente así:
+
+    facebook.svg  instagram.svg  x.svg  linkedin.svg
+    threads.svg   youtube.svg    spotify.svg
+
+No hay que tocar HTML, CSS ni JavaScript: el pie ya los busca en esta carpeta.
+Mientras falten, cada botón se muestra como una pastilla con el nombre de la red.
+
+Los iconos son marcas registradas de sus respectivos dueños. Se usan aquí para
+enlazar a los perfiles oficiales de UNAULA, que es el uso que contemplan las
+guías de marca de cada plataforma.
+
+LinkedIn es la excepción
+------------------------
+
+LinkedIn pidió a Simple Icons que retirara su icono, así que esa descarga falla.
+Su logo hay que bajarlo de la fuente oficial:
+
+    https://brand.linkedin.com/in-logo
+
+Sus condiciones permiten expresamente usarlo como enlace a una página de empresa,
+pero prohíben recolorearlo: sólo admiten azul, negro o blanco. Se descarga la
+versión NEGRA y se guarda tal cual, sin retocar, como:
+
+    assets/img/social/linkedin.svg
+
+Si la descarga viene en PNG en lugar de SVG, se guarda como linkedin.png: el pie
+prueba primero .svg y luego .png, así que funciona igual sin tocar código.

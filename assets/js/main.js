@@ -251,6 +251,33 @@ function inicializarModalHistorias() {
   });
 }
 
+/**
+ * Respaldo de los iconos del pie.
+ *
+ * Si falta el SVG se intenta la misma ruta en PNG —el logo oficial de LinkedIn
+ * no siempre se publica en SVG— y sólo si tampoco está, el botón se convierte
+ * en una pastilla con el nombre de la red. Así la página nunca muestra una
+ * imagen rota.
+ */
+function prepararIconosRedes() {
+  document.querySelectorAll(".pie-red img").forEach((img) => {
+    let intentadoPng = false;
+    const alFallar = () => {
+      if (!intentadoPng && img.getAttribute("src").endsWith(".svg")) {
+        intentadoPng = true;
+        img.src = img.getAttribute("src").slice(0, -4) + ".png";
+        return;
+      }
+      const enlace = img.closest(".pie-red");
+      if (!enlace || enlace.classList.contains("pie-red--sin-icono")) return;
+      enlace.classList.add("pie-red--sin-icono");
+      enlace.textContent = img.alt;
+    };
+    img.addEventListener("error", alFallar);
+    if (img.complete && img.naturalWidth === 0) alFallar();
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   if (!CONFIG.secciones.mostrarAgenda) {
     const s = document.getElementById("sec-agenda");
@@ -261,6 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (s) s.style.display = "none";
   }
   gestionarBarraFija();
+  prepararIconosRedes();
   inicializarModalHistorias();
   renderizarHistorias();
   renderizarAgenda();

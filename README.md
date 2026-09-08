@@ -78,9 +78,46 @@ esa dependencia externa —recomendable si el sitio va a vivir en una red cerrad
 se descarga Archivo desde <https://fonts.google.com/specimen/Archivo>, se deja en
 `assets/fonts/` y se reemplaza el `<link>` por una regla `@font-face`.
 
+## Pie de página
+
+El pie lleva los siete perfiles de UNAULA (Facebook, Instagram, X, LinkedIn,
+Threads, YouTube y Spotify), el correo de comunicaciones y los datos
+institucionales. Las direcciones están escritas directamente en el `<footer>` de
+`index.html`.
+
+**Faltan los iconos.** Se descargan de [Simple Icons](https://simpleicons.org),
+que los publica bajo CC0. Desde la raíz del repositorio, en PowerShell:
+
+```powershell
+$destino = "assets\img\social"
+foreach ($red in "facebook","instagram","x","threads","youtube","spotify") {
+  Invoke-WebRequest "https://cdn.simpleicons.org/$red/1A1A1A" -OutFile "$destino\$red.svg"
+}
+```
+
+El sufijo `/1A1A1A` pide el icono en el gris oscuro del pie; cambiando ese
+hexadecimal se obtiene en cualquier otro color. No hay que tocar HTML, CSS ni
+JavaScript: el pie ya los busca en esa carpeta con esos nombres.
+
+**LinkedIn va aparte.** Pidió a Simple Icons que retirara su icono, así que ese
+enlace ya no existe. Su logo se descarga de <https://brand.linkedin.com/in-logo>:
+sus condiciones permiten usarlo como enlace a una página de empresa, pero sólo
+admiten azul, negro o blanco y prohíben recolorearlo, así que se toma la versión
+negra y se guarda sin retocar como `assets/img/social/linkedin.svg`. Si la
+descarga viene en PNG, se guarda como `linkedin.png`: el pie prueba `.svg` y
+luego `.png`.
+
+Los iconos son marcas registradas de sus dueños. Se usan para enlazar a los
+perfiles oficiales de UNAULA, que es el uso que contemplan las guías de marca de
+cada plataforma.
+
+Mientras falten, cada botón se muestra como una pastilla con el nombre de la red:
+la página no se rompe y los enlaces funcionan igual.
+
 ## Pendientes
 
 - [ ] Configurar `URL_INSCRIPCION` con la dirección real del formulario
+- [ ] Cargar los siete iconos de redes en `assets/img/social/`
 - [ ] Reemplazar el banner y las imágenes por las piezas gráficas definitivas
 - [ ] Completar los campos marcados `[PENDIENTE]`: horario, correo de contacto, enlace a la política de datos
 - [ ] Definir la agenda del evento
