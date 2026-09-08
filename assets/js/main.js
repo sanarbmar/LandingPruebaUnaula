@@ -1,0 +1,267 @@
+/* =========================================================================
+   CONFIGURACIÓN DE UNAULA
+
+   URL_INSCRIPCION es el único valor que hay que cambiar para poner la
+   landing en marcha: es el formulario al que llevan todos los botones de
+   inscripción. Reemplaza el texto de abajo por la dirección real.
+   ========================================================================= */
+const URL_INSCRIPCION = "PEGAR_AQUI_LA_URL_DEL_FORMULARIO_DE_UNAULA";
+
+/**
+ * ========================================================================
+ * DATOS DEL EVENTO Y DE LA INSTITUCIÓN
+ * ========================================================================
+ */
+const CONFIG = {
+  evento: {
+    nombre: "Encuentro de Egresados UNAULA 60 Años",
+    lema: "60 años haciendo historia. Construyendo futuro.",
+    fechaTexto: "Viernes 6 de noviembre de 2026",
+    fechaISO: "2026-11-06T19:00:00-05:00",
+    hora: "",
+    lugar: "Plaza Mayor Medellín",
+    pabellon: "Pabellón Verde — Plaza Mayor Medellín",
+    ciudad: "Medellín, Antioquia"
+  },
+
+  secciones: {
+    mostrarAgenda: true,
+    mostrarHistorias: true
+  },
+
+  institucion: {
+    nombre: "Universidad Autónoma Latinoamericana",
+    sigla: "UNAULA",
+    direccion: "Carrera 55 N° 49-51, Medellín - Colombia",
+    telefono: "(+57) 604 511 21 99",
+    correoContacto: "[PENDIENTE]",
+    urlPolitica: "#",
+    urlSitio: "#",
+    urlSIU: "#"
+  }
+};
+
+/**
+ * ========================================================================
+ * DATOS DE HISTORIAS DE ÉXITO (Edición centralizada de historias)
+ * ========================================================================
+ */
+const HISTORIAS = [
+  {
+    titulo: "Cuando servir se convierte en legado",
+    resumen: "UNAULA forma líderes comprometidos con el…",
+    cuerpo: "[HISTORIA COMPLETA PENDIENTE]",
+    imagen: "assets/img/foto-celebrar-1-historia.jpg"
+  },
+  {
+    titulo: "Construir empresa, construir país",
+    resumen: "Los egresados UNAULA crean oportunidades y generan…",
+    cuerpo: "[HISTORIA COMPLETA PENDIENTE]",
+    imagen: "assets/img/foto-celebrar-1-historia.jpg"
+  },
+  {
+    titulo: "Cambiar vidas también es éxito",
+    resumen: "Transformar vidas es una forma de construir legado…",
+    cuerpo: "[HISTORIA COMPLETA PENDIENTE]",
+    imagen: "assets/img/foto-celebrar-1-historia.jpg"
+  },
+  {
+    titulo: "El conocimiento que transforma el futuro",
+    resumen: "El conocimiento genera transformación y progreso…",
+    cuerpo: "[HISTORIA COMPLETA PENDIENTE]",
+    imagen: "assets/img/foto-celebrar-1-historia.jpg"
+  }
+];
+
+/**
+ * ========================================================================
+ * DATOS DE AGENDA (Edición centralizada de momentos)
+ * ========================================================================
+ */
+const AGENDA = [
+  { hora: "8:00 a. m.", momento: "Llegada y registro" },
+  { hora: "8:00 a. m.", momento: "Bienvenida" },
+  { hora: "8:00 a. m.", momento: "Historias que nos inspiran" },
+  { hora: "8:00 a. m.", momento: "Actividad / experiencia" },
+  { hora: "8:00 a. m.", momento: "Celebración" },
+  { hora: "8:00 a. m.", momento: "Seguimos haciendo historia" }
+];
+
+/**
+ * ========================================================================
+ * ÚNICO PUNTO DE INTEGRACIÓN CON LOS DATOS
+ * ========================================================================
+ */
+/**
+ * ========================================================================
+ * CONSTRUCTOR DE URL PARA MICROSOFT FORMS
+ * ========================================================================
+ */
+/**
+ * ========================================================================
+ * GESTIÓN DE FLUJO Y TARJETA DE REGISTRO
+ * ========================================================================
+ */
+function irAInscripcion(e) {
+  if (e) e.preventDefault();
+  if (!URL_INSCRIPCION || URL_INSCRIPCION.startsWith("PEGAR_")) {
+    console.warn("Falta configurar URL_INSCRIPCION al inicio de este archivo.");
+    return;
+  }
+  window.open(URL_INSCRIPCION, "_blank", "noopener");
+}
+function gestionarBarraFija() {
+  const hero = document.getElementById("seccion-hero");
+  const barra = document.getElementById("barra-fija");
+  if (!hero || !barra) return;
+
+  window.addEventListener("scroll", () => {
+    const rect = hero.getBoundingClientRect();
+    if (rect.bottom < 60) {
+      barra.classList.add("visible");
+    } else {
+      barra.classList.remove("visible");
+    }
+  }, { passive: true });
+}
+
+function descargarICS() {
+  const evento = CONFIG.evento;
+  const contenido = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//UNAULA//Encuentro de Egresados 60 Anos//ES",
+    "CALSCALE:GREGORIAN",
+    "BEGIN:VEVENT",
+    "SUMMARY:" + evento.nombre,
+    "DESCRIPTION:" + evento.lema + " - Lugar: " + evento.lugar + " - " + evento.pabellon + " (" + evento.ciudad + ")",
+    "LOCATION:" + evento.lugar + "\\, " + evento.pabellon + "\\, " + evento.ciudad,
+    "DTSTART:20261106T190000",
+    "DTEND:20261106T233000",
+    "STATUS:CONFIRMED",
+    "END:VEVENT",
+    "END:VCALENDAR"
+  ].join("\r\n");
+
+  const blob = new Blob([contenido], { type: "text/calendar;charset=utf-8" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "encuentro-egresados-unaula-60-anos.ics";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+function scrollHistorias(direccion) {
+  const track = document.getElementById("carrusel-historias");
+  if (track) {
+    track.scrollBy({ left: direccion * 330, behavior: "smooth" });
+  }
+}
+
+/**
+ * ========================================================================
+ * GESTIÓN DEL MODAL NATIVO DE HISTORIAS DE ÉXITO (<dialog>)
+ * ========================================================================
+ */
+let tarjetaDisparadora = null;
+
+function abrirModalHistoria(indice) {
+  const historia = HISTORIAS[indice];
+  if (!historia) return;
+
+  tarjetaDisparadora = document.activeElement;
+
+  const modal = document.getElementById("modal-historia");
+  const img = document.getElementById("modal-historia-img");
+  const tit = document.getElementById("modal-historia-titulo");
+  const meta = document.getElementById("modal-historia-meta");
+  const txt = document.getElementById("modal-historia-texto");
+
+  if (img) {
+    img.src = historia.imagen || "assets/img/foto-celebrar-1-historia.jpg";
+    img.alt = historia.titulo;
+  }
+  if (tit) {
+    const palabras = (historia.titulo || "").trim().split(/\s+/);
+    if (palabras.length > 1) {
+      const ultima = palabras.pop();
+      tit.innerHTML = `${palabras.join(" ")} <span class="trazo-fin trazo-fin-dorado">${ultima}</span>`;
+    } else {
+      tit.innerHTML = `<span class="trazo-fin trazo-fin-dorado">${historia.titulo}</span>`;
+    }
+  }
+  if (meta) meta.style.display = "none";
+  if (txt) txt.textContent = historia.cuerpo || "[HISTORIA COMPLETA PENDIENTE]";
+
+  if (modal && typeof modal.showModal === "function") {
+    modal.showModal();
+    document.body.style.overflow = "hidden";
+  }
+}
+
+function cerrarModalHistoria() {
+  const modal = document.getElementById("modal-historia");
+  if (modal && modal.open) {
+    modal.close();
+  }
+}
+
+function renderizarHistorias() {
+  const track = document.getElementById("carrusel-historias");
+  if (!track || !Array.isArray(HISTORIAS)) return;
+  const fotoGenerica = "assets/img/foto-celebrar-1-historia.jpg";
+  track.innerHTML = HISTORIAS.map((h, i) => `
+    <button type="button" class="card-historia-carrusel" onclick="abrirModalHistoria(${i})" aria-haspopup="dialog" aria-label="Abrir historia: ${h.titulo}">
+      <img src="${h.imagen || fotoGenerica}" alt="${h.titulo}" class="foto-historia-item" loading="lazy">
+      <div class="historia-titulo-item">${h.titulo}</div>
+      <div class="historia-desc-item">${h.resumen}</div>
+      <span class="historia-ver-mas">ver mas</span>
+    </button>
+  `).join("");
+}
+
+function renderizarAgenda() {
+  const grid = document.getElementById("grid-agenda");
+  if (!grid || !Array.isArray(AGENDA)) return;
+  grid.innerHTML = AGENDA.map(a => `
+    <div class="card-agenda-vidrio">
+      <div class="agenda-hora">${a.hora}</div>
+      <div class="agenda-momento">${a.momento}</div>
+    </div>
+  `).join("");
+}
+
+function inicializarModalHistorias() {
+  const modal = document.getElementById("modal-historia");
+  if (!modal) return;
+
+  modal.addEventListener("close", () => {
+    document.body.style.overflow = "";
+    if (tarjetaDisparadora && typeof tarjetaDisparadora.focus === "function") {
+      tarjetaDisparadora.focus();
+    }
+  });
+
+  modal.addEventListener("click", (e) => {
+    // Cierre al hacer clic sobre el fondo del diálogo (backdrop)
+    if (e.target === modal) {
+      cerrarModalHistoria();
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (!CONFIG.secciones.mostrarAgenda) {
+    const s = document.getElementById("sec-agenda");
+    if (s) s.style.display = "none";
+  }
+  if (!CONFIG.secciones.mostrarHistorias) {
+    const s = document.getElementById("sec-historias");
+    if (s) s.style.display = "none";
+  }
+  gestionarBarraFija();
+  inicializarModalHistorias();
+  renderizarHistorias();
+  renderizarAgenda();
+});

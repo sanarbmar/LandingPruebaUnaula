@@ -6,3 +6,6 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Capturas y archivos de trabajo que genera Claude
+Claude outputs/
