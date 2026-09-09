@@ -124,7 +124,6 @@ cada plataforma.
 - [ ] Reemplazar `Hora de inicio` / `Hora de finalización` por el horario real: es texto escrito a mano en la tarjeta "Horario" de `index.html`
 - [ ] Definir las cuatro horas que hoy dicen "Por confirmar" en el arreglo `AGENDA`
 - [ ] Cargar las seis historias de éxito en el arreglo `HISTORIAS`: hoy su texto largo dice `[HISTORIA COMPLETA PENDIENTE]`
-- [ ] Reemplazar las imágenes de `assets/img/` por las piezas gráficas definitivas
 - [ ] Quitar la etiqueta `<meta name="robots" content="noindex, nofollow">` del `<head>` al publicar en el dominio oficial. Está puesta a propósito: mientras la landing viva en un dominio provisional no debe aparecer en buscadores, porque su botón de inscripción todavía no lleva a ningún formulario
 
 ## Publicación en GitHub Pages
