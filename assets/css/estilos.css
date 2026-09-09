@@ -307,7 +307,7 @@ summary:focus-visible {
 }
 .barra-fija-inner {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 10px;
   padding: 10px 16px;
@@ -316,6 +316,7 @@ summary:focus-visible {
 }
 .barra-btn {
   flex: 1;
+  max-width: 420px;                 /* botón único: centrado, sin estirarse */
   text-align: center;
   padding: 10px 14px;
   font-size: 13px;
@@ -337,11 +338,6 @@ summary:focus-visible {
 }
 .barra-btn-primario:hover {
   background-color: var(--blanco);
-}
-.barra-btn-secundario {
-  background-color: transparent;
-  color: var(--texto-claro);
-  border: 1px solid var(--dorado);
 }
 .barra-btn-secundario:hover {
   background-color: rgba(244, 167, 43, 0.15);
