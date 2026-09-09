@@ -17,3 +17,8 @@ assets/img/*.zip
 # Restos de macOS y de Windows
 __MACOSX/
 Thumbs.db
+
+# Carpetas residuales de Google AI Studio. OneDrive impide borrarlas del disco;
+# el proyecto no las usa y están fuera del repositorio a propósito.
+/src/
+assets/.aistudio/

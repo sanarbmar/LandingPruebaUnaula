@@ -81,10 +81,10 @@ const HISTORIAS = [
 const AGENDA = [
   { hora: "7:00 p. m. - 8:30 p. m.", momento: "Llegada y registro" },
   { hora: "8:30 p. m. - 9:00 p. m.", momento: "Bienvenida" },
-  { hora: "8:00 a. m.", momento: "Historias que nos inspiran" },
-  { hora: "8:00 a. m.", momento: "Actividad / experiencia" },
-  { hora: "8:00 a. m.", momento: "Celebración" },
-  { hora: "8:00 a. m.", momento: "Seguimos haciendo historia" }
+  { hora: "Por confirmar", momento: "Historias que nos inspiran" },
+  { hora: "Por confirmar", momento: "Actividad / experiencia" },
+  { hora: "Por confirmar", momento: "Celebración" },
+  { hora: "Por confirmar", momento: "Seguimos haciendo historia" }
 ];
 
 /**

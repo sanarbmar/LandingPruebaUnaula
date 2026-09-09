@@ -85,8 +85,9 @@ Threads, YouTube y Spotify), el correo de comunicaciones y los datos
 institucionales. Las direcciones están escritas directamente en el `<footer>` de
 `index.html`.
 
-**Faltan los iconos.** Se descargan de [Simple Icons](https://simpleicons.org),
-que los publica bajo CC0. Desde la raíz del repositorio, en PowerShell:
+**Los iconos ya están en el repositorio**, en `assets/img/social/`. Seis vienen de
+[Simple Icons](https://simpleicons.org), que los publica bajo CC0. Para
+regenerarlos —o para pedirlos en otro color— desde la raíz del repositorio:
 
 ```powershell
 $destino = "assets\img\social"
@@ -96,33 +97,31 @@ foreach ($red in "facebook","instagram","x","threads","youtube","spotify") {
 ```
 
 El sufijo `/1A1A1A` pide el icono en el gris oscuro del pie; cambiando ese
-hexadecimal se obtiene en cualquier otro color. No hay que tocar HTML, CSS ni
-JavaScript: el pie ya los busca en esa carpeta con esos nombres.
+hexadecimal se obtiene en cualquier otro color.
 
-**LinkedIn va aparte.** Pidió a Simple Icons que retirara su icono, así que ese
-enlace ya no existe. Su logo se descarga de <https://brand.linkedin.com/in-logo>:
+**LinkedIn va aparte.** Pidió a Simple Icons que retirara su icono, así que no
+está en ese catálogo. Su logo se descarga de <https://brand.linkedin.com/in-logo>:
 sus condiciones permiten usarlo como enlace a una página de empresa, pero sólo
-admiten azul, negro o blanco y prohíben recolorearlo, así que se toma la versión
-negra y se guarda sin retocar como `assets/img/social/linkedin.svg`. Si la
-descarga viene en PNG, se guarda como `linkedin.png`: el pie prueba `.svg` y
-luego `.png`.
+admiten azul, negro o blanco y prohíben recolorearlo. Por eso el archivo del
+repositorio es `linkedin.png`, la versión negra oficial sin retocar — el pie
+prueba primero `.svg` y luego `.png`, así que funciona igual.
+
+Si algún icono llegara a faltar, su botón se muestra como una pastilla con el
+nombre de la red: la página no se rompe y el enlace sigue funcionando.
 
 Los iconos son marcas registradas de sus dueños. Se usan para enlazar a los
 perfiles oficiales de UNAULA, que es el uso que contemplan las guías de marca de
 cada plataforma.
 
-Mientras falten, cada botón se muestra como una pastilla con el nombre de la red:
-la página no se rompe y los enlaces funcionan igual.
-
 ## Pendientes
 
 - [ ] Configurar `URL_INSCRIPCION` con la dirección real del formulario
-- [ ] Cargar los siete iconos de redes en `assets/img/social/`
 - [ ] Reemplazar el banner y las imágenes por las piezas gráficas definitivas
 - [ ] Completar los campos marcados `[PENDIENTE]`: horario, correo de contacto, enlace a la política de datos
 - [ ] Definir la agenda del evento
 - [ ] Cargar las seis historias de éxito
-- [ ] Quitar la etiqueta `<meta name="robots" content="noindex, nofollow">` al publicar en el dominio oficial
+- [ ] Quitar la etiqueta `<meta name="robots" content="noindex, nofollow">` del `<head>` al publicar en el dominio oficial de UNAULA. Está puesta a propósito: mientras la landing viva en un dominio provisional no debe aparecer en buscadores, porque su botón de inscripción todavía no lleva a ningún formulario
+- [ ] Definir las horas de las cuatro actividades que hoy dicen "Por confirmar" en el arreglo `AGENDA`
 
 ## Publicación en GitHub Pages
 
