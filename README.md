@@ -27,7 +27,7 @@ de la barra inferior fija, el del bloque rojo de bienvenida y el del cierre.
 El sitio es estático: `index.html` se abre con doble clic y funciona, sin
 compilación, sin dependencias y sin necesidad de cuenta de ningún tipo.
 
-Publicado con GitHub Pages en `https://sanarbmar.github.io/LandingPruebaUnaula/`
+Publicado con GitHub Pages en `https://sanarbmar.github.io/LandingUnaula/`
 
 ## Estructura del repositorio
 
