@@ -1,6 +1,0 @@
-{
-  "name": "Encuentro de Egresados — UNAULA 60 Años",
-  "description": "Página oficial de bienvenida e inscripción para el Encuentro de Egresados 60 Años UNAULA con buscador por cédula y redirección a Microsoft Forms.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}

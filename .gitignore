@@ -4,8 +4,16 @@ dist/
 coverage/
 .DS_Store
 *.log
-.env*
-!.env.example
+.env
+.env.*
 
 # Capturas y archivos de trabajo que genera Claude
 Claude outputs/
+
+# Descargas originales de las que se extraen los recursos finales
+assets/img/original/
+assets/img/*.zip
+
+# Restos de macOS y de Windows
+__MACOSX/
+Thumbs.db
