@@ -42,16 +42,21 @@ assets/
 
 ## Configuración
 
-Además de `URL_INSCRIPCION`, el objeto `CONFIG` al inicio de `assets/js/main.js`
-concentra lo que cambia entre eventos:
+`assets/js/main.js` concentra todo lo editable. De arriba hacia abajo:
 
-- `evento` — nombre, fecha, hora, lugar
-- `institucion` — datos de contacto y enlaces
-- `secciones` — banderas para ocultar la agenda o las historias de éxito
+| Qué | Dónde | Para qué |
+|---|---|---|
+| `URL_INSCRIPCION` | primera línea | el formulario al que llevan los cinco botones de inscripción |
+| `CONFIG.secciones` | objeto `CONFIG` | poner una bandera en `false` oculta la agenda o las historias de éxito |
+| `AGENDA` | arreglo | las seis tarjetas de "Así viviremos este encuentro" |
+| `HISTORIAS` | arreglo | las seis historias de éxito y su contenido del modal |
 
-Las historias de éxito y la agenda se editan en los arreglos `HISTORIAS` y
-`AGENDA` del mismo archivo. Hoy tienen contenido de ejemplo marcado
-`[PENDIENTE]`, a la espera del material definitivo.
+**La agenda y las historias se dibujan desde JavaScript.** Editar esas tarjetas
+en el HTML no sirve: el script reemplaza el contenido del contenedor al cargar la
+página. Se editan en los arreglos.
+
+El resto del contenido —titulares, párrafos, datos del evento y del pie— está
+escrito directamente en `index.html`.
 
 ## Tipografía
 
@@ -115,13 +120,12 @@ cada plataforma.
 
 ## Pendientes
 
-- [ ] Configurar `URL_INSCRIPCION` con la dirección real del formulario
-- [ ] Reemplazar el banner y las imágenes por las piezas gráficas definitivas
-- [ ] Completar los campos marcados `[PENDIENTE]`: horario, correo de contacto, enlace a la política de datos
-- [ ] Definir la agenda del evento
-- [ ] Cargar las seis historias de éxito
-- [ ] Quitar la etiqueta `<meta name="robots" content="noindex, nofollow">` del `<head>` al publicar en el dominio oficial de UNAULA. Está puesta a propósito: mientras la landing viva en un dominio provisional no debe aparecer en buscadores, porque su botón de inscripción todavía no lleva a ningún formulario
-- [ ] Definir las horas de las cuatro actividades que hoy dicen "Por confirmar" en el arreglo `AGENDA`
+- [ ] Configurar `URL_INSCRIPCION` en `assets/js/main.js` con la dirección del formulario de UNAULA
+- [ ] Reemplazar `Hora de inicio` / `Hora de finalización` por el horario real: es texto escrito a mano en la tarjeta "Horario" de `index.html`
+- [ ] Definir las cuatro horas que hoy dicen "Por confirmar" en el arreglo `AGENDA`
+- [ ] Cargar las seis historias de éxito en el arreglo `HISTORIAS`: hoy su texto largo dice `[HISTORIA COMPLETA PENDIENTE]`
+- [ ] Reemplazar las imágenes de `assets/img/` por las piezas gráficas definitivas
+- [ ] Quitar la etiqueta `<meta name="robots" content="noindex, nofollow">` del `<head>` al publicar en el dominio oficial. Está puesta a propósito: mientras la landing viva en un dominio provisional no debe aparecer en buscadores, porque su botón de inscripción todavía no lleva a ningún formulario
 
 ## Publicación en GitHub Pages
 

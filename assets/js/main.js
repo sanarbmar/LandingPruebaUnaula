@@ -9,35 +9,16 @@ const URL_INSCRIPCION = "PEGAR_AQUI_LA_URL_DEL_FORMULARIO_DE_UNAULA";
 
 /**
  * ========================================================================
- * DATOS DEL EVENTO Y DE LA INSTITUCIÓN
+ * INTERRUPTORES DE SECCIÓN
+ *
+ * Poner una bandera en false oculta esa sección de la página. Útil mientras
+ * su contenido definitivo no esté listo.
  * ========================================================================
  */
 const CONFIG = {
-  evento: {
-    nombre: "Encuentro de Egresados UNAULA 60 Años",
-    lema: "60 años haciendo historia. Construyendo futuro.",
-    fechaTexto: "Viernes 6 de noviembre de 2026",
-    fechaISO: "2026-11-06T19:00:00-05:00",
-    hora: "",
-    lugar: "Plaza Mayor Medellín",
-    pabellon: "Pabellón Verde — Plaza Mayor Medellín",
-    ciudad: "Medellín, Antioquia"
-  },
-
   secciones: {
     mostrarAgenda: true,
     mostrarHistorias: true
-  },
-
-  institucion: {
-    nombre: "Universidad Autónoma Latinoamericana",
-    sigla: "UNAULA",
-    direccion: "Carrera 55 N° 49-51, Medellín - Colombia",
-    telefono: "(+57) 604 511 21 99",
-    correoContacto: "[PENDIENTE]",
-    urlPolitica: "#",
-    urlSitio: "#",
-    urlSIU: "#"
   }
 };
 
@@ -125,32 +106,6 @@ function gestionarBarraFija() {
   }, { passive: true });
 }
 
-function descargarICS() {
-  const evento = CONFIG.evento;
-  const contenido = [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    "PRODID:-//UNAULA//Encuentro de Egresados 60 Anos//ES",
-    "CALSCALE:GREGORIAN",
-    "BEGIN:VEVENT",
-    "SUMMARY:" + evento.nombre,
-    "DESCRIPTION:" + evento.lema + " - Lugar: " + evento.lugar + " - " + evento.pabellon + " (" + evento.ciudad + ")",
-    "LOCATION:" + evento.lugar + "\\, " + evento.pabellon + "\\, " + evento.ciudad,
-    "DTSTART:20261106T190000",
-    "DTEND:20261106T233000",
-    "STATUS:CONFIRMED",
-    "END:VEVENT",
-    "END:VCALENDAR"
-  ].join("\r\n");
-
-  const blob = new Blob([contenido], { type: "text/calendar;charset=utf-8" });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "encuentro-egresados-unaula-60-anos.ics";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
 
 function scrollHistorias(direccion) {
   const track = document.getElementById("carrusel-historias");
